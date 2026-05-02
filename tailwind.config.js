@@ -1,0 +1,83 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        bg: {
+          primary: '#0F0A04',
+          surface: '#1C1408',
+          card: '#2A1F0E',
+          elevated: '#3A2C18',
+        },
+        accent: {
+          gold: '#C9A84C',
+          'gold-light': '#F0D98A',
+          'gold-dark': '#A8873A',
+          'gold-muted': '#8A6B2E',
+          green: '#52B788',
+          'green-dark': '#3A8A64',
+          amber: '#D97706',
+          teal: '#0D9488',
+          red: '#E05252',
+        },
+        text: {
+          primary: '#F2E4C4',
+          secondary: '#D4BC8A',
+          muted: '#9A7E5C',
+          faint: '#5A4430',
+        },
+        border: {
+          DEFAULT: '#4A3820',
+          light: '#6A5238',
+          gold: '#C9A84C',
+        },
+      },
+      fontFamily: {
+        arabic: ['Amiri', 'serif'],
+        sans: ['Inter', 'sans-serif'],
+      },
+      fontSize: {
+        arabic: ['22px', { lineHeight: '1.9' }],
+        'arabic-lg': ['26px', { lineHeight: '1.9' }],
+        'arabic-sm': ['18px', { lineHeight: '1.9' }],
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.35s ease-out',
+        'slide-up': 'slideUp 0.35s ease-out',
+        'pulse-gold': 'pulseGold 2s ease-in-out infinite',
+        'spin-slow': 'spin 3s linear infinite',
+        'counter-pop': 'counterPop 0.18s ease-out',
+        shimmer: 'shimmer 1.5s infinite',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(16px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        pulseGold: {
+          '0%, 100%': { boxShadow: '0 0 0 0 rgba(201,168,76,0.35)' },
+          '50%': { boxShadow: '0 0 0 10px rgba(201,168,76,0)' },
+        },
+        counterPop: {
+          '0%': { transform: 'scale(1.25)', opacity: '0.7' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+      },
+      boxShadow: {
+        gold: '0 0 20px rgba(201,168,76,0.18)',
+        'gold-md': '0 0 32px rgba(201,168,76,0.25)',
+        card: '0 2px 12px rgba(0,0,0,0.5)',
+      },
+    },
+  },
+  plugins: [],
+}

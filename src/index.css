@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #0F0A04;
+    color: #F2E4C4;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A84C' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  * { box-sizing: border-box; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: #1C1408; }
+  ::-webkit-scrollbar-thumb { background: #4A3820; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #C9A84C; }
+}
+
+@layer components {
+  /* ── Cards ──────────────────────────────────────── */
+  .card {
+    @apply bg-bg-card border border-border rounded-xl p-4 shadow-card;
+  }
+  .card-surface {
+    @apply bg-bg-surface border border-border rounded-xl p-4 shadow-card;
+  }
+  .card-hover {
+    @apply card transition-all duration-200 hover:border-accent-gold hover:shadow-gold cursor-pointer;
+  }
+
+  /* ── Buttons ─────────────────────────────────────── */
+  .btn-gold {
+    @apply bg-accent-gold hover:bg-accent-gold-light active:bg-accent-gold-dark
+           text-bg-primary font-semibold px-4 py-2 rounded-lg
+           transition-all duration-150 active:scale-95 select-none;
+  }
+  .btn-outline {
+    @apply border border-accent-gold text-accent-gold
+           hover:bg-accent-gold hover:text-bg-primary
+           font-semibold px-4 py-2 rounded-lg
+           transition-all duration-150 active:scale-95 select-none;
+  }
+  .btn-ghost {
+    @apply text-text-muted hover:text-text-primary hover:bg-bg-elevated
+           px-3 py-2 rounded-lg transition-all duration-150;
+  }
+  .btn-danger {
+    @apply text-accent-red hover:bg-accent-red hover:bg-opacity-10
+           px-3 py-2 rounded-lg transition-all duration-150 text-sm;
+  }
+
+  /* ── Arabic text ─────────────────────────────────── */
+  .arabic-text {
+    font-family: 'Amiri', serif;
+    font-size: 22px;
+    line-height: 1.9;
+    direction: rtl;
+    text-align: right;
+    color: #F2E4C4;
+  }
+  .arabic-text-lg {
+    font-family: 'Amiri', serif;
+    font-size: 26px;
+    line-height: 1.9;
+    direction: rtl;
+    text-align: right;
+    color: #F2E4C4;
+  }
+  .arabic-text-sm {
+    font-family: 'Amiri', serif;
+    font-size: 18px;
+    line-height: 1.9;
+    direction: rtl;
+    text-align: right;
+    color: #F2E4C4;
+  }
+
+  /* ── Glow effects ────────────────────────────────── */
+  .gold-glow   { box-shadow: 0 0 20px rgba(201,168,76,0.18); }
+  .gold-glow-md { box-shadow: 0 0 32px rgba(201,168,76,0.28); }
+
+  /* ── Specialty cards ─────────────────────────────── */
+  .ayat-card {
+    @apply card border border-accent-gold gold-glow;
+  }
+  .hadith-card {
+    @apply card border-l-2 border-l-accent-gold border-t border-r border-b border-border;
+  }
+  .belief-block {
+    @apply card border border-amber-700;
+    background: rgba(120, 53, 15, 0.18);
+  }
+  .reframe-block {
+    @apply card border border-teal-700;
+    background: rgba(13, 148, 136, 0.10);
+  }
+  .seerah-card-gold {
+    @apply card border border-accent-gold gold-glow;
+  }
+
+  /* ── Form fields ─────────────────────────────────── */
+  .input-field {
+    @apply w-full bg-bg-surface border border-border rounded-lg px-4 py-3
+           text-text-primary placeholder-text-faint
+           focus:outline-none focus:border-accent-gold focus:ring-1 focus:ring-accent-gold focus:ring-opacity-30
+           transition-colors duration-150;
+  }
+  .textarea-field {
+    @apply input-field resize-none;
+  }
+
+  /* ── Badges ─────────────────────────��────────────── */
+  .tag {
+    @apply text-xs px-2.5 py-0.5 rounded-full border font-medium;
+  }
+  .tag-gold  { @apply tag border-accent-gold text-accent-gold; background: rgba(201,168,76,0.10); }
+  .tag-green { @apply tag border-accent-green text-accent-green; background: rgba(82,183,136,0.10); }
+
+  .badge       { @apply text-xs font-medium px-2 py-0.5 rounded; }
+  .badge-gold  { @apply badge text-accent-gold; background: rgba(201,168,76,0.15); }
+  .badge-green { @apply badge text-accent-green; background: rgba(82,183,136,0.15); }
+  .badge-amber { @apply badge text-amber-400; background: rgba(217,119,6,0.15); }
+  .badge-teal  { @apply badge text-teal-400; background: rgba(13,148,136,0.15); }
+  .badge-red   { @apply badge text-red-400; background: rgba(224,82,82,0.12); }
+
+  /* ── Typography ────────────────────────────��─────── */
+  .section-title { @apply text-xl font-semibold text-text-primary mb-4; }
+  .divider       { @apply border-t border-border my-4; }
+
+  /* ── Skeleton loader ─────────────────────────────── */
+  .skeleton {
+    background: linear-gradient(90deg, #2A1F0E 25%, #3A2C18 50%, #2A1F0E 75%);
+    background-size: 200% 100%;
+    @apply rounded animate-shimmer;
+  }
+
+  /* ── Animate-in ─────────────────────���────────────── */
+  .animate-in { animation: slideUp 0.35s ease-out; }
+  .fade-in    { animation: fadeIn 0.35s ease-out; }
+
+  /* ── Completion ring (SVG rotate) ────────────────── */
+  .completion-ring {
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }
+
+  /* ── Counter pop ─────────────────────────────────── */
+  .counter-pop { animation: counterPop 0.18s ease-out; }
+}
+
+/* ── RTL overrides ─────────────────────��─────────────── */
+[dir="rtl"] .ml-auto { margin-left: 0; margin-right: auto; }
+[dir="rtl"] .mr-auto { margin-right: 0; margin-left: auto; }
+[dir="rtl"] .border-l-2 { border-left: none; border-right-width: 2px; }
+[dir="rtl"] .border-l-accent-gold { border-right-color: #C9A84C; border-left-color: transparent; }
+[dir="rtl"] .rounded-l-lg { border-radius: 0 0.5rem 0.5rem 0; }
+[dir="rtl"] .rounded-r-lg { border-radius: 0.5rem 0 0 0.5rem; }
+
+/* ── Scrollbar hidden utility ────────────────────────── */
+.scrollbar-none { scrollbar-width: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+
+/* ── Mobile safe bottom padding ─────────────────────── */
+@media (max-width: 768px) {
+  .mobile-nav {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 50;
+  }
+}
+
+/* ── Line clamp utility (fallback) ──────────────────── */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
