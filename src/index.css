@@ -2,24 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Theme variables ──────────────────────────────────────────────────────── */
+:root {
+  --color-bg-primary:   #0F0A04;
+  --color-bg-surface:   #1C1408;
+  --color-bg-card:      #2A1F0E;
+  --color-bg-elevated:  #3A2C18;
+  --color-text-primary:   #F2E4C4;
+  --color-text-secondary: #D4BC8A;
+  --color-text-muted:     #9A7E5C;
+  --color-text-faint:     #5A4430;
+  --color-border:       #4A3820;
+  --color-border-light: #6A5238;
+}
+
+.theme-light {
+  --color-bg-primary:   #FBF7EE;
+  --color-bg-surface:   #F3EDD8;
+  --color-bg-card:      #EDE4CA;
+  --color-bg-elevated:  #E5D9B4;
+  --color-text-primary:   #1A0E04;
+  --color-text-secondary: #3A220A;
+  --color-text-muted:     #7A5530;
+  --color-text-faint:     #A88040;
+  --color-border:       #D4B878;
+  --color-border-light: #E4CC98;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    background-color: #0F0A04;
-    color: #F2E4C4;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
     background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A84C' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 
   * { box-sizing: border-box; }
 
   ::-webkit-scrollbar { width: 5px; height: 5px; }
-  ::-webkit-scrollbar-track { background: #1C1408; }
-  ::-webkit-scrollbar-thumb { background: #4A3820; border-radius: 4px; }
+  ::-webkit-scrollbar-track { background: var(--color-bg-surface); }
+  ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
   ::-webkit-scrollbar-thumb:hover { background: #C9A84C; }
 }
 
@@ -27,6 +55,7 @@
   /* ── Cards ──────────────────────────────────────── */
   .card {
     @apply bg-bg-card border border-border rounded-xl p-4 shadow-card;
+    transition: background-color 0.25s ease, border-color 0.25s ease;
   }
   .card-surface {
     @apply bg-bg-surface border border-border rounded-xl p-4 shadow-card;
@@ -63,7 +92,7 @@
     line-height: 1.9;
     direction: rtl;
     text-align: right;
-    color: #F2E4C4;
+    color: var(--color-text-primary);
   }
   .arabic-text-lg {
     font-family: 'Amiri', serif;
@@ -71,7 +100,7 @@
     line-height: 1.9;
     direction: rtl;
     text-align: right;
-    color: #F2E4C4;
+    color: var(--color-text-primary);
   }
   .arabic-text-sm {
     font-family: 'Amiri', serif;
@@ -79,7 +108,7 @@
     line-height: 1.9;
     direction: rtl;
     text-align: right;
-    color: #F2E4C4;
+    color: var(--color-text-primary);
   }
 
   /* ── Glow effects ────────────────────────────────── */
@@ -136,7 +165,7 @@
 
   /* ── Skeleton loader ─────────────────────────────── */
   .skeleton {
-    background: linear-gradient(90deg, #2A1F0E 25%, #3A2C18 50%, #2A1F0E 75%);
+    background: linear-gradient(90deg, var(--color-bg-card) 25%, var(--color-bg-elevated) 50%, var(--color-bg-card) 75%);
     background-size: 200% 100%;
     @apply rounded animate-shimmer;
   }

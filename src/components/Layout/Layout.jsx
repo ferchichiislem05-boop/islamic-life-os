@@ -20,7 +20,8 @@ const LANGS = [
 
 export default function Layout() {
   const { t, i18n } = useTranslation()
-  const { prefs, setLang } = useAppStore()
+  const { prefs, setLang, setTheme } = useAppStore()
+  const isLight = prefs.theme === 'light'
   const [drawerOpen, setDrawerOpen] = useState(false)
   const isRTL = prefs.lang === 'ar'
 
@@ -86,8 +87,17 @@ export default function Layout() {
           ))}
         </nav>
 
-        {/* Language switcher */}
-        <div className="flex items-center gap-0.5 shrink-0">
+        {/* Theme toggle + Language switcher */}
+        <div className="flex items-center gap-1.5 shrink-0">
+          <button
+            onClick={() => setTheme(isLight ? 'dark' : 'light')}
+            className="w-8 h-7 rounded text-sm transition-all duration-150 text-text-muted hover:text-text-primary hover:bg-bg-card"
+            aria-label={isLight ? t('common.dark_mode') : t('common.light_mode')}
+            title={isLight ? t('common.dark_mode') : t('common.light_mode')}
+          >
+            {isLight ? '🌙' : '☀️'}
+          </button>
+          <div className="w-px h-5 bg-border shrink-0" />
           {LANGS.map(({ code, label }) => (
             <button
               key={code}
@@ -160,26 +170,35 @@ export default function Layout() {
               ))}
             </nav>
 
-            {/* Drawer lang footer */}
-            <div className="p-4 border-t border-border shrink-0">
-              <p className="text-text-faint text-xs mb-2 uppercase tracking-wider">
-                Language
-              </p>
-              <div className="flex gap-2">
-                {LANGS.map(({ code, label }) => (
-                  <button
-                    key={code}
-                    onClick={() => { handleLang(code); setDrawerOpen(false) }}
-                    className={clsx(
-                      'flex-1 py-1.5 rounded-lg text-sm font-semibold transition-all',
-                      prefs.lang === code
-                        ? 'bg-accent-gold text-bg-primary'
-                        : 'bg-bg-card text-text-muted hover:text-text-primary border border-border'
-                    )}
-                  >
-                    {label}
-                  </button>
-                ))}
+            {/* Drawer footer: theme + language */}
+            <div className="p-4 border-t border-border shrink-0 space-y-3">
+              <button
+                onClick={() => { setTheme(isLight ? 'dark' : 'light'); setDrawerOpen(false) }}
+                className="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-bg-card border border-border text-text-muted hover:text-text-primary transition-all text-sm"
+              >
+                <span>{isLight ? t('common.dark_mode') : t('common.light_mode')}</span>
+                <span>{isLight ? '🌙' : '☀️'}</span>
+              </button>
+              <div>
+                <p className="text-text-faint text-xs mb-2 uppercase tracking-wider">
+                  Language
+                </p>
+                <div className="flex gap-2">
+                  {LANGS.map(({ code, label }) => (
+                    <button
+                      key={code}
+                      onClick={() => { handleLang(code); setDrawerOpen(false) }}
+                      className={clsx(
+                        'flex-1 py-1.5 rounded-lg text-sm font-semibold transition-all',
+                        prefs.lang === code
+                          ? 'bg-accent-gold text-bg-primary'
+                          : 'bg-bg-card text-text-muted hover:text-text-primary border border-border'
+                      )}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </aside>

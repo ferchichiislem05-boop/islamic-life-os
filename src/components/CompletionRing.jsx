@@ -17,7 +17,7 @@ export default function CompletionRing({ done, total, size = 120 }) {
           cy={cy}
           r={radius}
           fill="none"
-          stroke="#4A3820"
+          stroke="var(--color-border)"
           strokeWidth="8"
         />
         {/* Progress arc */}

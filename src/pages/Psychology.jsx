@@ -6,6 +6,7 @@ import { BarChart, Bar, LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContai
 import useAppStore from '../store/useAppStore.js'
 import SessionDisplay from '../components/SessionDisplay.jsx'
 import { generatePsychSession } from '../services/claudeApi.js'
+import { useChartColors } from '../hooks/useChartColors.js'
 import clsx from 'clsx'
 
 const CATEGORIES = [
@@ -50,6 +51,7 @@ export default function Psychology() {
   const outputRef = useRef(null)
 
   const lang = i18n.language
+  const chartColors = useChartColors()
 
   // Handle navigation from Seerah page
   useEffect(() => {
@@ -189,9 +191,9 @@ export default function Psychology() {
                   <p className="text-xs text-text-muted mb-2">{t('stats.sessions_breakdown')}</p>
                   <ResponsiveContainer width="100%" height={180}>
                     <BarChart data={barData}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#4A3820" />
-                      <XAxis dataKey="name" tick={{ fill: '#9A7E5C', fontSize: 10 }} />
-                      <YAxis tick={{ fill: '#9A7E5C', fontSize: 10 }} />
+                      <CartesianGrid strokeDasharray="3 3" stroke={chartColors.grid} />
+                      <XAxis dataKey="name" tick={{ fill: chartColors.tick, fontSize: 10 }} />
+                      <YAxis tick={{ fill: chartColors.tick, fontSize: 10 }} />
                       <Tooltip content={<CustomTooltip />} />
                       <Bar dataKey="count" fill="#C9A84C" radius={[4, 4, 0, 0]} />
                     </BarChart>
@@ -206,9 +208,9 @@ export default function Psychology() {
                   <p className="text-xs text-text-muted mb-2">{t('stats.sessions_chart')}</p>
                   <ResponsiveContainer width="100%" height={140}>
                     <LineChart data={lineData}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#4A3820" />
-                      <XAxis dataKey="date" tick={{ fill: '#9A7E5C', fontSize: 10 }} />
-                      <YAxis tick={{ fill: '#9A7E5C', fontSize: 10 }} />
+                      <CartesianGrid strokeDasharray="3 3" stroke={chartColors.grid} />
+                      <XAxis dataKey="date" tick={{ fill: chartColors.tick, fontSize: 10 }} />
+                      <YAxis tick={{ fill: chartColors.tick, fontSize: 10 }} />
                       <Tooltip content={<CustomTooltip />} />
                       <Line
                         type="monotone"

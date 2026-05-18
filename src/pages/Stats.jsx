@@ -10,6 +10,7 @@ import {
 import useAppStore from '../store/useAppStore.js'
 import adhkarDatabase, { adhkarCategories } from '../data/adhkar.js'
 import StreakWidget from '../components/StreakWidget.jsx'
+import { useChartColors } from '../hooks/useChartColors.js'
 
 const COLORS = ['#C9A84C', '#52B788', '#0D9488', '#D97706', '#F0D98A', '#DB2777', '#2563EB']
 
@@ -47,6 +48,7 @@ export default function Stats() {
   } = useAppStore()
 
   const lang = i18n.language
+  const chartColors = useChartColors()
   const totalAllTime = getTotalDhikrAllTime()
   const sessionsByCategory = getSessionsByCategory()
   const consistencyScore = getConsistencyScore()
@@ -238,13 +240,13 @@ export default function Stats() {
           <h3 className="font-semibold text-text-primary mb-4">{t('stats.sessions_chart')} — {t('stats.last_30')}</h3>
           <ResponsiveContainer width="100%" height={200}>
             <LineChart data={sessionsTimeline}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#4A3820" />
+              <CartesianGrid strokeDasharray="3 3" stroke={chartColors.grid} />
               <XAxis
                 dataKey="date"
-                tick={{ fill: '#9A7E5C', fontSize: 10 }}
+                tick={{ fill: chartColors.tick, fontSize: 10 }}
                 interval={6}
               />
-              <YAxis tick={{ fill: '#9A7E5C', fontSize: 10 }} allowDecimals={false} />
+              <YAxis tick={{ fill: chartColors.tick, fontSize: 10 }} allowDecimals={false} />
               <Tooltip content={<CustomTooltip />} />
               <Line
                 type="monotone"
@@ -265,9 +267,9 @@ export default function Stats() {
           <h3 className="font-semibold text-text-primary mb-4">{t('stats.sessions_breakdown')}</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={sessionsCatData} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" stroke="#4A3820" horizontal={false} />
-              <XAxis type="number" tick={{ fill: '#9A7E5C', fontSize: 10 }} allowDecimals={false} />
-              <YAxis type="category" dataKey="name" tick={{ fill: '#9A7E5C', fontSize: 10 }} width={90} />
+              <CartesianGrid strokeDasharray="3 3" stroke={chartColors.grid} horizontal={false} />
+              <XAxis type="number" tick={{ fill: chartColors.tick, fontSize: 10 }} allowDecimals={false} />
+              <YAxis type="category" dataKey="name" tick={{ fill: chartColors.tick, fontSize: 10 }} width={90} />
               <Tooltip content={<CustomTooltip />} />
               <Bar dataKey="count" fill="#C9A84C" radius={[0, 4, 4, 0]} />
             </BarChart>
@@ -281,8 +283,8 @@ export default function Stats() {
           <h3 className="font-semibold text-text-primary mb-4">{t('stats.focus_balance')}</h3>
           <ResponsiveContainer width="100%" height={280}>
             <RadarChart data={radarData}>
-              <PolarGrid stroke="#4A3820" />
-              <PolarAngleAxis dataKey="subject" tick={{ fill: '#9A7E5C', fontSize: 10 }} />
+              <PolarGrid stroke={chartColors.grid} />
+              <PolarAngleAxis dataKey="subject" tick={{ fill: chartColors.tick, fontSize: 10 }} />
               <PolarRadiusAxis tick={{ fill: '#4A3820', fontSize: 8 }} />
               <Radar
                 dataKey="sessions"

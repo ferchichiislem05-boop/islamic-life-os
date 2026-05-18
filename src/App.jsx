@@ -22,6 +22,10 @@ export default function App() {
   }, [prefs.lang, i18n])
 
   useEffect(() => {
+    document.documentElement.classList.toggle('theme-light', prefs.theme === 'light')
+  }, [prefs.theme])
+
+  useEffect(() => {
     checkAndUpdateStreak()
   }, [checkAndUpdateStreak])
 

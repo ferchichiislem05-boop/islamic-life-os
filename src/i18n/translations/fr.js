@@ -181,6 +181,8 @@ const fr = {
     lang_ar: 'العربية',
     lang_fr: 'Français',
     settings: 'Paramètres',
+    light_mode: 'Passer en Mode Clair',
+    dark_mode: 'Passer en Mode Sombre',
     bismillah: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
     allahu_akbar: 'اللَّهُ أَكْبَرُ',
   },
