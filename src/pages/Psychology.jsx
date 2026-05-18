@@ -157,13 +157,13 @@ export default function Psychology() {
           {/* Top insight */}
           {topStruggle && (
             <div className="belief-block">
-              <p className="text-xs text-amber-400 font-medium mb-1">Your Top Focus</p>
+              <p className="text-xs text-amber-400 font-medium mb-1">{t('psychology.top_focus')}</p>
               <p className="text-amber-200 font-semibold">
                 {CATEGORIES.find((c) => c.id === topStruggle[0])?.icon}{' '}
                 {t(`psychology.categories.${topStruggle[0]}`)}
               </p>
               <p className="text-amber-300 text-xs mt-1">
-                {topStruggle[1]} sessions — you keep returning here
+                {topStruggle[1]} {t('psychology.sessions_keep_returning')}
               </p>
             </div>
           )}
@@ -173,7 +173,7 @@ export default function Psychology() {
             onClick={() => setShowCharts(!showCharts)}
             className="w-full btn-outline text-sm py-2"
           >
-            📊 {showCharts ? 'Hide' : 'Show'} Charts
+            📊 {showCharts ? t('psychology.hide_charts') : t('psychology.show_charts')}
           </button>
         </div>
 
@@ -182,11 +182,11 @@ export default function Psychology() {
           {/* Charts panel */}
           {showCharts && (
             <div className="card space-y-6 animate-in">
-              <h3 className="font-semibold text-text-primary">Session Analytics</h3>
+              <h3 className="font-semibold text-text-primary">{t('psychology.session_analytics')}</h3>
 
               {barData.length > 0 ? (
                 <div>
-                  <p className="text-xs text-text-muted mb-2">Sessions by Category</p>
+                  <p className="text-xs text-text-muted mb-2">{t('stats.sessions_breakdown')}</p>
                   <ResponsiveContainer width="100%" height={180}>
                     <BarChart data={barData}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#4A3820" />
@@ -203,7 +203,7 @@ export default function Psychology() {
 
               {lineData.length > 1 && (
                 <div>
-                  <p className="text-xs text-text-muted mb-2">Sessions Over Time</p>
+                  <p className="text-xs text-text-muted mb-2">{t('stats.sessions_chart')}</p>
                   <ResponsiveContainer width="100%" height={140}>
                     <LineChart data={lineData}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#4A3820" />
@@ -230,7 +230,7 @@ export default function Psychology() {
               <h2 className="font-semibold text-text-primary">
                 {selectedCategory
                   ? `${CATEGORIES.find((c) => c.id === selectedCategory)?.icon} ${t(`psychology.categories.${selectedCategory}`)}`
-                  : 'New Session'}
+                  : t('psychology.new_session')}
               </h2>
               {selectedCategory && (
                 <button

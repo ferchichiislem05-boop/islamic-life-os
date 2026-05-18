@@ -57,7 +57,7 @@ function PropheticModelCard({ model }) {
       {model.parallel && (
         <div className="bg-bg-surface rounded-lg p-3 border border-border">
           <p className="text-xs text-accent-gold font-medium uppercase tracking-wide mb-1">
-            How This Applies to You
+            {t('psychology.session_output.how_applies')}
           </p>
           <p className="text-text-secondary text-sm leading-relaxed">{model.parallel}</p>
         </div>
@@ -115,6 +115,7 @@ function ExerciseItem({ exercise, index, sessionId, onCheck }) {
 }
 
 function WeeklyPlanDay({ day, isToday }) {
+  const { t } = useTranslation()
   const [open, setOpen] = useState(isToday)
   return (
     <div
@@ -149,21 +150,21 @@ function WeeklyPlanDay({ day, isToday }) {
           {day.task && (
             <div>
               <p className="text-xs text-text-muted font-medium uppercase mb-1">
-                Today's Task
+                {t('psychology.session_output.today_task')}
               </p>
               <p className="text-text-primary text-sm leading-relaxed">{day.task}</p>
             </div>
           )}
           {day.dua && (
             <div dir="rtl" className="bg-bg-surface rounded-lg p-3 border border-border">
-              <p className="text-text-muted text-xs mb-1" dir="ltr">Dua</p>
+              <p className="text-text-muted text-xs mb-1" dir="ltr">{t('psychology.session_output.dua')}</p>
               <p className="arabic-text-sm">{day.dua}</p>
             </div>
           )}
           {day.reflection && (
             <div>
               <p className="text-xs text-text-muted font-medium uppercase mb-1">
-                Evening Reflection
+                {t('psychology.session_output.evening_reflection')}
               </p>
               <p className="text-text-muted text-sm italic">{day.reflection}</p>
             </div>
@@ -258,7 +259,7 @@ export default function SessionDisplay({ session, isNew = false }) {
       {data.rootBelief && (
         <div className="belief-block">
           <p className="text-xs text-amber-400 font-semibold uppercase tracking-wider mb-1">
-            Core Belief Block
+            {t('psychology.session_output.core_belief')}
           </p>
           <p className="text-amber-200 font-semibold text-base">
             "{data.rootBelief}"
@@ -270,7 +271,7 @@ export default function SessionDisplay({ session, isNew = false }) {
       {data.islamicReframe && (
         <div className="reframe-block">
           <p className="text-xs text-teal-400 font-semibold uppercase tracking-wider mb-1">
-            {t('psychology.session_output.islamicReframe') || 'Islamic Reframe'}
+            {t('psychology.session_output.islamicReframe')}
           </p>
           <p className="text-teal-100 text-sm leading-relaxed">{data.islamicReframe}</p>
         </div>

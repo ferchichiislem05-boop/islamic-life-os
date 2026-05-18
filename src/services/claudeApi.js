@@ -11,7 +11,7 @@ const getClient = () => {
   return new Anthropic({ apiKey: key, dangerouslyAllowBrowser: true })
 }
 
-const MODEL = 'claude-sonnet-4-20250514'
+const MODEL = 'claude-sonnet-4-6'
 
 // ─── JSON schema validator ────────────────────────────────────────────────
 function isNonEmptyString(v) {
@@ -223,7 +223,7 @@ Return ONLY valid JSON matching this exact schema (no markdown, no prose outside
   const response = await client.messages.create({
     model: MODEL,
     max_tokens: 4096,
-    system: systemPrompt,
+    system: [{ type: 'text', text: systemPrompt, cache_control: { type: 'ephemeral' } }],
     messages: [{ role: 'user', content: userMessage }],
   })
 
@@ -265,7 +265,7 @@ Return ONLY valid JSON (no markdown):
   const response = await client.messages.create({
     model: MODEL,
     max_tokens: 2048,
-    system: systemPrompt,
+    system: [{ type: 'text', text: systemPrompt, cache_control: { type: 'ephemeral' } }],
     messages: [{ role: 'user', content: `Find authentic duas for: ${query}` }],
   })
 
@@ -315,7 +315,7 @@ Return ONLY valid JSON (no markdown):
   const response = await client.messages.create({
     model: MODEL,
     max_tokens: 2048,
-    system: systemPrompt,
+    system: [{ type: 'text', text: systemPrompt, cache_control: { type: 'ephemeral' } }],
     messages: [{ role: 'user', content: userMessage }],
   })
 
@@ -324,23 +324,24 @@ Return ONLY valid JSON (no markdown):
   return raw
 }
 
-// ─── Apply Seerah to My Life ───────────────────────────��──────────────────
+// ─── Apply Seerah to My Life ─────────────────────────────────────────────────
 export async function applySeerahToLife(seerahTitle, seerahLesson, userSituation) {
   const client = getClient()
 
   const response = await client.messages.create({
     model: MODEL,
     max_tokens: 512,
+    system: [
+      {
+        type: 'text',
+        text: 'You are a compassionate Islamic life coach. When given a Seerah story and a personal situation, respond in 3-4 sentences showing specifically how the Prophet\'s ﷺ example applies. Be direct, practical, and warm — speak as a mentor, not a lecturer. Ground every point in the story provided.',
+        cache_control: { type: 'ephemeral' },
+      },
+    ],
     messages: [
       {
         role: 'user',
-        content: `Based on this Seerah story about the Prophet ﷺ:
-Title: ${seerahTitle}
-Key Lesson: ${seerahLesson}
-
-My current situation: ${userSituation}
-
-In 3-4 sentences, tell me specifically how I can apply the Prophet's ﷺ example to my situation right now. Be direct, practical, and compassionate. Speak to me as a person, not as a lecture.`,
+        content: `Seerah Story: ${seerahTitle}\nKey Lesson: ${seerahLesson}\n\nMy situation: ${userSituation}`,
       },
     ],
   })

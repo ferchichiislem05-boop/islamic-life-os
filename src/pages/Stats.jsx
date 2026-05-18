@@ -165,7 +165,7 @@ export default function Stats() {
         <StatCard
           label={t('stats.streak_record')}
           value={streak.longest}
-          sub={`${t('stats.days')} — best ever`}
+          sub={`${t('stats.days')} — ${t('stats.best_ever')}`}
           color="text-accent-green"
         />
         <StatCard
@@ -278,7 +278,7 @@ export default function Stats() {
       {/* Radar chart: balance */}
       {psychSessions.length >= 3 && (
         <div className="card">
-          <h3 className="font-semibold text-text-primary mb-4">Your Focus Balance</h3>
+          <h3 className="font-semibold text-text-primary mb-4">{t('stats.focus_balance')}</h3>
           <ResponsiveContainer width="100%" height={280}>
             <RadarChart data={radarData}>
               <PolarGrid stroke="#4A3820" />
@@ -298,7 +298,7 @@ export default function Stats() {
       {/* Most used adhkar */}
       {mostUsedAdhkar.length > 0 && (
         <div className="card">
-          <h3 className="font-semibold text-text-primary mb-4">Most Recited Adhkar</h3>
+          <h3 className="font-semibold text-text-primary mb-4">{t('stats.most_recited')}</h3>
           <div className="space-y-3">
             {mostUsedAdhkar.map((a, i) => (
               <div key={a.id} className="flex items-center gap-3">
@@ -326,10 +326,10 @@ export default function Stats() {
             <p className="text-text-muted text-xs font-medium uppercase mb-2">Your Path</p>
             <p className="text-text-primary font-semibold">
               {totalAllTime > 1000
-                ? '🌟 Consistent Rememberer'
+                ? `🌟 ${t('stats.path_consistent')}`
                 : totalAllTime > 100
-                ? '📿 Growing in Dhikr'
-                : '🌱 Beginning the Journey'}
+                ? `📿 ${t('stats.path_growing')}`
+                : `🌱 ${t('stats.path_beginning')}`}
             </p>
           </div>
           <div>
@@ -343,9 +343,9 @@ export default function Stats() {
             </p>
           </div>
           <div>
-            <p className="text-text-muted text-xs font-medium uppercase mb-2">Today's Adhkar</p>
+            <p className="text-text-muted text-xs font-medium uppercase mb-2">{t('stats.today_adhkar')}</p>
             <p className="text-text-primary font-semibold">
-              {weeklyAdhkar}/{adhkarDatabase.length} completed
+              {weeklyAdhkar}/{adhkarDatabase.length} {t('stats.completed')}
             </p>
           </div>
           <div>

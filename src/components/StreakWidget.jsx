@@ -1,10 +1,12 @@
 import React from 'react'
-import { format, subDays, parseISO } from 'date-fns'
+import { format, subDays } from 'date-fns'
+import { useTranslation } from 'react-i18next'
 import useAppStore from '../store/useAppStore.js'
 
 const DAYS_TO_SHOW = 30
 
 export default function StreakWidget() {
+  const { t } = useTranslation()
   const { streak } = useAppStore()
   const today = new Date()
   const days = Array.from({ length: DAYS_TO_SHOW }, (_, i) =>
@@ -15,17 +17,17 @@ export default function StreakWidget() {
     <div className="card">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <p className="text-text-muted text-sm">Current Streak</p>
+          <p className="text-text-muted text-sm">{t('stats.current_streak')}</p>
           <p className="text-3xl font-bold text-accent-gold">
             {streak.current}
-            <span className="text-base font-normal text-text-muted ml-1">days</span>
+            <span className="text-base font-normal text-text-muted ml-1">{t('stats.days')}</span>
           </p>
         </div>
         <div className="text-right">
-          <p className="text-text-muted text-sm">Longest</p>
+          <p className="text-text-muted text-sm">{t('stats.longest')}</p>
           <p className="text-xl font-semibold text-accent-green">
             {streak.longest}
-            <span className="text-sm text-text-muted ml-1">days</span>
+            <span className="text-sm text-text-muted ml-1">{t('stats.days')}</span>
           </p>
         </div>
       </div>
@@ -56,7 +58,7 @@ export default function StreakWidget() {
         <span className="text-[10px] text-text-faint">
           {format(days[0], 'MMM d')}
         </span>
-        <span className="text-[10px] text-text-faint">Today</span>
+        <span className="text-[10px] text-text-faint">{t('stats.today')}</span>
       </div>
     </div>
   )

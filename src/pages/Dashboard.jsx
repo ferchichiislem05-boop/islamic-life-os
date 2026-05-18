@@ -7,14 +7,16 @@ import CompletionRing from '../components/CompletionRing.jsx'
 import StreakWidget from '../components/StreakWidget.jsx'
 import adhkarDatabase from '../data/adhkar.js'
 
-function getGreeting(lang) {
+function getGreeting() {
   const hour = new Date().getHours()
-  const keys = {
-    en: hour < 5 ? 'greeting_night' : hour < 7 ? 'greeting_fajr' : hour < 12 ? 'greeting_sabah' : hour < 15 ? 'greeting_dhuhr' : hour < 17 ? 'greeting_asr' : hour < 20 ? 'greeting_maghrib' : 'greeting_isha',
-    ar: hour < 5 ? 'greeting_night' : hour < 7 ? 'greeting_fajr' : hour < 12 ? 'greeting_sabah' : hour < 15 ? 'greeting_dhuhr' : hour < 17 ? 'greeting_asr' : hour < 20 ? 'greeting_maghrib' : 'greeting_isha',
-    fr: hour < 5 ? 'greeting_night' : hour < 7 ? 'greeting_fajr' : hour < 12 ? 'greeting_sabah' : hour < 15 ? 'greeting_dhuhr' : hour < 17 ? 'greeting_asr' : hour < 20 ? 'greeting_maghrib' : 'greeting_isha',
-  }
-  return `dashboard.${keys[lang] || keys.en}`
+  const key = hour < 5 ? 'greeting_night'
+    : hour < 7  ? 'greeting_fajr'
+    : hour < 12 ? 'greeting_sabah'
+    : hour < 15 ? 'greeting_dhuhr'
+    : hour < 17 ? 'greeting_asr'
+    : hour < 20 ? 'greeting_maghrib'
+    : 'greeting_isha'
+  return `dashboard.${key}`
 }
 
 const QUICK_CARDS = [
@@ -63,7 +65,7 @@ export default function Dashboard() {
       <div className="card border-accent-gold gold-glow text-center py-8">
         <p className="text-text-muted text-sm mb-1">{format(now, 'EEEE, MMMM d yyyy')}</p>
         <h1 className="text-3xl font-bold text-accent-gold mb-2">
-          {t(getGreeting(lang))} 🌟
+          {t(getGreeting())} 🌟
         </h1>
         <p dir={lang === 'ar' ? 'rtl' : 'ltr'} className="text-text-muted text-sm">
           {t('dashboard.subtitle')}
@@ -89,7 +91,7 @@ export default function Dashboard() {
         </div>
         <div className="card text-center">
           <p className="text-2xl font-bold text-amber-400">{streak.longest}</p>
-          <p className="text-text-muted text-xs mt-1">Best Streak</p>
+          <p className="text-text-muted text-xs mt-1">{t('stats.streak_record')}</p>
         </div>
       </div>
 
@@ -103,7 +105,7 @@ export default function Dashboard() {
             <p className="text-xl font-bold text-text-primary">
               {completedToday}/{totalToday}
             </p>
-            <p className="text-text-muted text-sm">adhkar completed</p>
+            <p className="text-text-muted text-sm">{t('dashboard.adhkar_completed')}</p>
             <Link to="/adhkar" className="mt-3 btn-gold inline-block text-sm px-4 py-1.5">
               {completedToday < totalToday ? t('dashboard.start_morning') : t('dashboard.continue')}
             </Link>
@@ -142,9 +144,9 @@ export default function Dashboard() {
       {psychSessions.length > 0 && (
         <div>
           <div className="flex items-center justify-between mb-3">
-            <h2 className="section-title mb-0">Recent Sessions</h2>
+            <h2 className="section-title mb-0">{t('dashboard.recent_sessions')}</h2>
             <Link to="/psychology" className="text-accent-gold text-sm hover:underline">
-              View All →
+              {t('dashboard.view_all')} →
             </Link>
           </div>
           <div className="space-y-2">

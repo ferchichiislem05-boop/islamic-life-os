@@ -65,7 +65,7 @@ export default function Seerah() {
         type="text"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder="Search stories, tags, themes..."
+        placeholder={t('seerah.search_placeholder')}
         className="input-field"
       />
 
@@ -106,21 +106,21 @@ export default function Seerah() {
               : 'bg-bg-surface text-text-muted hover:text-text-primary'
           )}
         >
-          ★ Saved ({seerahBookmarks.length})
+          ★ {t('seerah.saved', { count: seerahBookmarks.length })}
         </button>
       </div>
 
       {/* AI Story Generator */}
       <div className="card border-teal-700">
         <h3 className="font-semibold text-text-primary mb-3 flex items-center gap-2">
-          ✨ Ask Claude for a Seerah Story
+          ✨ {t('seerah.ai_ask_title')}
         </h3>
         <div className="flex gap-2">
           <input
             type="text"
             value={aiTopic}
             onChange={(e) => setAiTopic(e.target.value)}
-            placeholder="e.g. 'how the Prophet handled business failure' or 'his mercy toward enemies'"
+            placeholder={t('seerah.ai_placeholder')}
             className="input-field"
             onKeyDown={(e) => e.key === 'Enter' && handleAiStory()}
           />
@@ -129,7 +129,7 @@ export default function Seerah() {
             disabled={aiLoading}
             className="btn-gold shrink-0 px-4 text-sm"
           >
-            {aiLoading ? '...' : 'Ask'}
+            {aiLoading ? '...' : t('seerah.ai_ask_btn')}
           </button>
         </div>
 
@@ -176,8 +176,8 @@ export default function Seerah() {
         <div className="text-center py-12">
           <p className="text-text-muted">
             {showBookmarks && seerahBookmarks.length === 0
-              ? 'No bookmarks yet. Star stories you want to revisit.'
-              : 'No stories found.'}
+              ? t('seerah.no_bookmarks')
+              : t('seerah.no_stories')}
           </p>
         </div>
       ) : (
